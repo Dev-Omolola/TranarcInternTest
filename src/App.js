@@ -3,6 +3,7 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Skeleton } from 'antd';
+import Play from './component/Images/play-circle.svg'
 // import Searched from './Navbar'
 
 const apiKey = '971ca30d666209695faca9c60b0d5d35';
@@ -107,11 +108,18 @@ function App() {
                 alt={movie.title}
 
               />
+
+            
             </div>
             <b>{movie.title}</b>
             <p>{movie.release_date}</p>
             {/* <p>{heroMovie.overview}</p> */}
-
+            {/* <button
+          className='play-button'
+          onClick={() => playVideo(movie)}
+        >
+          <FontAwesomeIcon icon={faPlay} /> Play
+        </button> */}
           </div>
         ))}
       </div>

@@ -1,40 +1,31 @@
-.Search{
+.Search {
     position: relative;
-}
-
-.Search-input{
-    display: flex;
-    /* background-color: gray; */
-    /* border: 1px solid blue; */
-}
-.Search-input input{
-    background: none;
-    outline: none;
-}
-.show-search{
-    position:absolute;
+  }
+   
+  .show-search {
+    position: absolute;
     width: 75%;
     height: 390px;
     top: 60px;
     left: 120px;
     /* border: 2px solid red; */
-    transition: .5s;
+    transition: 0.5s;
     color: white;
-    
+    background-color: rgba(0, 0, 0, 0.7); 
+    padding: 10px;
+    overflow-y: auto; 
+  }
   
-  }
-  /* .search{
-    width: 70% ;
-    border: 2px solid brown;
-  } */
-  .Hero-search{
+  .Hero-search {
     display: flex;
-  justify-content: space-between;
-  margin-top:20px;
-  border: 2px solid brown; 
-  width:75%
+    justify-content: space-between;
+    margin-top: 20px;
+    /* border: 2px solid brown; */
+    width: 100%; 
+    padding: 10px;
   }
-  .Hero-search img{
-    width:100% ;
-  height: 80%;
+  
+  .Hero-search img {
+    width: 100%;
+    height: auto;
   }
