@@ -1,3 +1,6 @@
-.moda::-webkit-scrollbar{
-    overflow: hidden;
+.modal::-webkit-scrollbar{
+    overflow-y: hidden;
+}
+.modal{
+    background-color: black;
 }
