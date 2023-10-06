@@ -3,44 +3,13 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Skeleton } from 'antd';
-import Play from './component/Images/play-circle.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlayCircle } from '@fortawesome/free-solid-svg-icons';
 
 const apiKey = '971ca30d666209695faca9c60b0d5d35';
 const baseURL = 'https://api.themoviedb.org/3/search/movie';
 
-function App() {
-  const [movies, setMovies] = useState([]);
-  const [heroMovie, setHeroMovie] = useState(null);
-  const [Spin, setSpin] = useState(true);
-
-  useEffect(() => {
-    const fetchMovies = async () => {
-      try {
-        const response = await axios.get(baseURL, {
-          params: {
-            api_key: apiKey,
-            query: 'Nigeria',
-            region: 'Nigeria'
-          },
-        });
-        setMovies(response.data.results);
-        console.log(response.data.results);
-        setSpin(false);
-
-        if (response.data.results.length > 0) {
-          setHeroMovie(response.data.results[5]);
-        }
-      } catch (error) {
-        console.error('Error fetching data:', error);
-        setSpin(false);
-      }
-    };
-
-    fetchMovies();
-  }, []);
-
+function App(props) {
   const [playingVideo, setPlayingVideo] = useState(null);
 
   const playVideo = (movie) => {
@@ -53,12 +22,12 @@ function App() {
 
   return (
     <div className='main'>
-      {Spin && <Skeleton active={Spin} className='spin' />}
+      {props.Spin && <Skeleton active={props.Spin} className='spin' />}
       <div className='Hero-div'>
-        {heroMovie && (
-          <div key={heroMovie.id} className='row Hero'>
+        {props.heroMovie && (
+          <div key={props.heroMovie.id} className='row Hero'>
             <div className='Hero-img col-7'>
-              {playingVideo === heroMovie ? (
+              {playingVideo === props.heroMovie ? (
                 <video
                   className='movie-video'
                   src={
@@ -69,12 +38,12 @@ function App() {
                   onClick={stopVideo}
                 ></video>
               ) : (
-                <div onClick={() => playVideo(heroMovie)}>
+                <div >
                   <img
-                    src={`https://image.tmdb.org/t/p/w500${heroMovie.poster_path}`}
-                    alt={heroMovie.title}
+                    src={`https://image.tmdb.org/t/p/w500${props.heroMovie.poster_path}`}
+                    alt={props.heroMovie.title}
                   />
-                  <FontAwesomeIcon icon={faPlayCircle} className='play-icon' />
+                  <FontAwesomeIcon icon={faPlayCircle} className='play-icon'  onClick={() => playVideo(props.heroMovie)}/>
                 </div>
               )}
             </div>
@@ -82,21 +51,21 @@ function App() {
             <div className='col-5 Hero-mini'>
               <div>
                 <img
-                  src={`https://image.tmdb.org/t/p/w500${heroMovie.poster_path}`}
-                  alt={heroMovie.title}
+                  src={`https://image.tmdb.org/t/p/w500${props.heroMovie.poster_path}`}
+                  alt={props.heroMovie.title}
                 />
-                <p>{heroMovie.overview}</p>
+                <p>{props.heroMovie.overview}</p>
               </div>
               <div>
-                <h5>{heroMovie.title}</h5>
-                <p>{heroMovie.release_date}</p>
+                <h5>{props.heroMovie.title}</h5>
+                <p>{props.heroMovie.release_date}</p>
               </div>
             </div>
           </div>
         )}
       </div>
       <div className='main-div container'>
-        {movies.map((movie) => (
+        {props.movies.map((movie) => (
           <div key={movie.id} className='main-divv'>
             <div className='movie-container'>
               <img
