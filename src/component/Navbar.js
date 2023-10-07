@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Button from './Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Navbar.css'
@@ -18,7 +18,7 @@ const Navbar = (props) => {
             <input className="form-control me-2" onChange={props.SearchMovie} type="search" placeholder="Search" aria-label="Search" />
             <Button className="btn btn-outline-success" color="success" type="submit" btnText="Search" myFunction={props.Searchftn} />
             {props.Searchftn && (
-              <Button btnText='Cancel' myFunction={props.cancelResults} />
+              <Button btnText='Cancel' display={props.showCancel} myFunction={props.cancelResults} />
             )}
           </form>
         </div>

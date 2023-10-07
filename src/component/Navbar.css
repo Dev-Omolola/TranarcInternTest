@@ -1,5 +1,6 @@
 .Search {
     position: relative;
+    border: 1px solid green;
   }
    
   .show-search {
@@ -19,7 +20,7 @@
   .Hero-search {
     display: flex;
     justify-content: space-between;
-    margin-top: 20px;
+    /* margin-top: 20px; */
     /* border: 2px solid brown; */
     width: 100%; 
     padding: 10px;

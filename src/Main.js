@@ -8,6 +8,7 @@ const Main = () => {
   const [movies, setMovies] = useState([]);
   const [Spin, setSpin] = useState(false);
   const [heroMovie, setHeroMovie] = useState(null);
+  const[showCancel, setshowCancel] = useState(false)
 
   const apiKey = '971ca30d666209695faca9c60b0d5d35';
   const baseURL = `https://api.themoviedb.org/3/search/movie?query=${SearchMovie}&include_adult=false&language=en-US&page=1`;
@@ -47,7 +48,8 @@ const Main = () => {
       });
       console.log(response.data.results, 'Search result');
       setHeroMovie(response.data.results[0]);
-      setMovies(response.data.results)
+      setMovies(response.data.results);
+      setshowCancel(true)
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -56,9 +58,11 @@ const Main = () => {
     console.log("clicking");
     fetchMovies()
   };
+
   return (
     <>
       <Navbar
+        showCancel={showCancel}
         Searchftn={Searchftn}
         cancelResults={cancelResults}
         SearchMovie={(e) => setSearchMovie(e.target.value)} />
