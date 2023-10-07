@@ -1,13 +1,12 @@
 import './App.css';
-import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Skeleton } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlayCircle } from '@fortawesome/free-solid-svg-icons';
 
-const apiKey = '971ca30d666209695faca9c60b0d5d35';
-const baseURL = 'https://api.themoviedb.org/3/search/movie';
+// const apiKey = '971ca30d666209695faca9c60b0d5d35';
+// const baseURL = 'https://api.themoviedb.org/3/search/movie';
 
 function App(props) {
   const [playingVideo, setPlayingVideo] = useState(null);
@@ -22,6 +21,7 @@ function App(props) {
 
   return (
     <div className='main'>
+      
       {props.Spin && <Skeleton active={props.Spin} className='spin' />}
       <div className='Hero-div'>
         {props.heroMovie && (
