@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react'
 import Navbar from './component/Navbar'
 import App from './App'
 import axios from 'axios'
+import Footer from './component/Footer'
 
 const Main = () => {
+  //Variable state declaration
   const [SearchMovie, setSearchMovie] = useState("")
   const [movies, setMovies] = useState([]);
   const [Spin, setSpin] = useState(false);
@@ -12,6 +14,8 @@ const Main = () => {
 
   const apiKey = '971ca30d666209695faca9c60b0d5d35';
   const baseURL = `https://api.themoviedb.org/3/search/movie?query=${SearchMovie}&include_adult=false&language=en-US&page=1`;
+  
+  //Fetching the movies
   const fetchMovies = async () => {
     try {
       const response = await axios.get(baseURL, {
@@ -39,6 +43,8 @@ const Main = () => {
     setSpin(true)
     fetchMovies();
   }, []);
+
+  //Search function
   const Searchftn = async () => {
     try {
       const response = await axios.get(baseURL, {
@@ -54,6 +60,8 @@ const Main = () => {
       console.error('Error fetching data:', error);
     }
   };
+
+  //Cancel Search result and return to default
   const cancelResults = () => {
     console.log("clicking");
     fetchMovies()
@@ -69,7 +77,9 @@ const Main = () => {
       <App
         movies={movies}
         Spin={Spin}
-        heroMovie={heroMovie} />
+        heroMovie={heroMovie} 
+        />
+        
     </>
   )
 }

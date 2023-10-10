@@ -1,20 +1,32 @@
 import './App.css';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Skeleton } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlayCircle } from '@fortawesome/free-solid-svg-icons';
+import Footer from './component/Footer'
 
 // const apiKey = '971ca30d666209695faca9c60b0d5d35';
 // const baseURL = 'https://api.themoviedb.org/3/search/movie';
 
 function App(props) {
   const [playingVideo, setPlayingVideo] = useState(null);
+  const [modalMovie, setmodalMovie] = useState(null)
 
+  const modalftnn=(movie)=>{
+    if(movie){
+      console.log(movie);
+      setmodalMovie(movie)
+      console.log(movie);
+    }
+  }
+
+  //Play Trailer
   const playVideo = (movie) => {
     setPlayingVideo(movie);
   };
 
+  //Stop Trailer
   const stopVideo = () => {
     setPlayingVideo(null);
   };
@@ -22,9 +34,50 @@ function App(props) {
   return (
     <div className='main'>
 
+     
       {props.Spin && <Skeleton active={props.Spin} className='spin' />}
       <div className='wrapper'>
+      {/* Modal Start */}
 
+      {modalMovie &&
+        <div>
+          <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div className="modal-dialog bg bg-dark">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h1 className="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                  <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div className="modal-body">
+                  <div className='movie-container' >
+
+                    <img
+                      src={`https://image.tmdb.org/t/p/w500${modalMovie.poster_path}`}
+                      alt={modalMovie.title}
+
+
+                    />
+                    <div className='play-button' >
+                      <FontAwesomeIcon icon={faPlayCircle} className='play-icon' />
+                    </div>
+                  </div>
+                  <b>{modalMovie.title}</b>
+                  <p>{modalMovie.release_date}</p>
+                  <p>{modalMovie.overview}</p>
+
+                </div>
+                <div className="modal-footer">
+                  <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" className="btn btn-primary">Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+      {/* Modal End */}
+
+        {/* Hero Section Start */}
         <div className='Hero-div'>
           {props.heroMovie && (
             <div key={props.heroMovie.id} className='row Hero'>
@@ -51,6 +104,7 @@ function App(props) {
               </div>
 
               <div className='col-5 Hero-mini'>
+
                 <div>
                   <img
                     src={`https://image.tmdb.org/t/p/w500${props.heroMovie.poster_path}`}
@@ -62,30 +116,42 @@ function App(props) {
                   <h5>{props.heroMovie.title}</h5>
                   <p>{props.heroMovie.release_date}</p>
                 </div>
+
               </div>
+
             </div>
           )}
         </div>
-        <div className='main-div container'>
+        {/* Hero Section End */}
+
+        {/* Movies Section Start */}
+        <div className='main-div container' >
+
           {props.movies.map((movie) => (
-            <div key={movie.id} className='main-divv'>
-              <div className='movie-container'>
+            <div key={movie.id} className='main-divv' data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={()=>modalftnn(movie)}>
+              <div className='movie-container' >
+
                 <img
                   src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                   alt={movie.title}
+
+
                 />
-                <div className='play-button' onClick={() => playVideo(movie)}>
+                <div className='play-button' >
                   <FontAwesomeIcon icon={faPlayCircle} className='play-icon' />
                 </div>
               </div>
               <b>{movie.title}</b>
               <p>{movie.release_date}</p>
+
             </div>
           ))}
-        </div>
-      </div>
 
-    </div>
+
+        </div>
+        <Footer />
+      </div>
+    </div >
   );
 }
 

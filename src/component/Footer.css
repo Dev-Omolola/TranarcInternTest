@@ -1,0 +1,15 @@
+footer{
+    font-size: 15px;
+    font-weight: 700;
+    display: flex;
+    justify-content: space-between;
+    color: white;
+  
+  }
+  footer ul{
+    display: inline;
+    font-size: 14px;
+  }
+  footer img{
+    width: 150px;
+  }
